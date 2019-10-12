@@ -1,0 +1,198 @@
+
+
+import java.util.Scanner;
+public class vacationPlannerUpgrade {
+
+    public static final String SOD_PREMIUM = "premium sod";
+    public static final String SOD_SPECIAL = "special sod";
+    public static final String SOD_NORMAL = "normal sod";
+    public static final double DISCOUNT_RATE_SENIOR = .25;
+    public static final double DISCOUNT_RATE_MEMBER = .15;
+    public static final double DISCOUNT_RATE_NONE = 0;
+    public static final double TAX_RATE = .075;
+    public static final int PRICE_PREMIUM = 200;
+    public static final int PRICE_SPECIAL = 125;
+    public static final int PRICE_NORMAL = 75;
+
+    public static void welcomeBanner(){
+        System.out.println("Welcome to the Sod Purchasing Program\nPlease begin by entering your name");
+
+        System.out.println("***************************************************************");
+    }
+    public static void exitBanner(String username){
+        System.out.println("***************************************************************");
+        System.out.println("Thank you for using the program, " + username + ". Goodbye!");
+    }
+    public static void displayDiscountMenu() {
+        System.out.println("***************************************************************");
+        System.out.println("Are you a A:Senior, B:Member, or C:Neither, press A, B, C, or Q to exit");
+    }
+    public static void displaySodMenu() {
+        System.out.println("***************************************************************");
+        System.out.println("What kind of Sod would you like? \n A: Premium Sod - $200\n B: Special Sod - $125\nC: Normal Sod - $75\nQ: Quit\nPlease input A, B, C, or Q");
+    }
+    public static char validDiscount(){
+
+        char menuSelection;
+        Scanner sc = new Scanner(System.in);
+        displayDiscountMenu();
+        menuSelection = sc.next().charAt(0);
+        menuSelection = Character.toUpperCase(menuSelection);
+        while(menuSelection != 'A' && menuSelection != 'B' && menuSelection != 'C' && menuSelection != 'Q')
+        {
+            System.out.println("Sorry, that's not a valid option, please choose again.");
+            displayDiscountMenu();
+            menuSelection = sc.next().charAt(0);
+            menuSelection = Character.toUpperCase(menuSelection);
+        }
+        return menuSelection;
+    }
+    public static char validSod() {
+        displaySodMenu();
+        Scanner sc = new Scanner(System.in);
+        char menuSelection;
+        menuSelection = sc.next().charAt(0);
+        menuSelection = Character.toUpperCase(menuSelection);
+        while(menuSelection != 'A' && menuSelection != 'B' && menuSelection != 'C')
+        {
+            System.out.println("Sorry that not a valid option, please choose again.");
+            displaySodMenu();
+            menuSelection = sc.next().charAt(0);
+            menuSelection = Character.toUpperCase(menuSelection);
+        }
+        return menuSelection;
+    }
+    public static String getUsername() {
+        String username;
+        Scanner sc = new Scanner(System.in);
+        username = sc.nextLine();
+        System.out.println("Thank you " + username + "\n***************************************************************");
+        return username;
+    }
+    public static void displayOrderReport(String item, double discountRate, double orderAmount, double discount, double tax, double total) {
+
+        System.out.printf("Your purchase is %s\n", item);
+        System.out.printf("Your discount rate is %.2f %f\n", discountRate);
+        System.out.printf("Your Purchase costed $%f\n", orderAmount);
+        System.out.printf("Your discount was $%.2f\n", discount);
+        System.out.printf("Your your tax was $%.2f\n", tax);
+        System.out.printf("Your total price $%.2f\n", total);
+    }
+    public static void displayFinalreport(double discountRateApplied, int sodCount, int[] sodTypeCount, double totalDiscounted, double totalTax, double taxRate, double priceofALL. ){
+        System.out.printf("Your discount rate is %.2f\n", discountRateApplied);
+        System.out.printf("Your total number of sods purchased is %d\n", sodCount);
+        System.out.printf("Your total number of Premium Sod purchased is %d\n", sodTypeCount[0]);
+        System.out.printf("Your total number of Special Sod purchased is %d\n", sodTypeCount[1]);
+        System.out.printf("Your total number of Normal Sod purchased is %d\n", sodTypeCount[2]);
+        System.out.printf("Your total amount discounted  is %.2f\n", totalDiscounted);
+        System.out.printf("Your total amount taxed is  planned is %.2f\n", totalTax);
+        System.out.printf("Your total cost for all items purchased is $%.2f\n", priceofALL);
+    }
+    {
+
+    }
+    public static int[] sodCounter(char sod)
+    {
+        int sodCounter[] = {0,0,0};
+        if(sod == 'A')
+        {
+            sodCounter[0] += 1;
+        }
+        else if(sod == 'B')
+        {
+            sodCounter[1] +=1;
+        }
+        else if(sod == 'C')
+        {
+            sodCounter[2] +=1;
+        }
+        return sodCounter;
+    }
+    public static void main(String args[]){
+        // variables
+        String username = "";
+        char option1 = ' ', option2;
+        double orderPrice = 0;
+        double discountRate = 0;
+        double totalDiscounted = 0;
+        double totalTaxed = 0;
+        int orderCount = 0;
+        int sodCount [] = {0,0,0};
+        double sodPrice;
+        double discount;
+        double tax;
+        String sod;
+        String loopCheck = "";
+        double totalPrice = 0;
+        //main program
+
+        welcomeBanner();
+        username = getUsername();
+        option1 = validDiscount();
+        {
+            if (option1 == 'A') {
+                discountRate = DISCOUNT_RATE_SENIOR;
+            } else if (option1 == 'B') {
+                discountRate = DISCOUNT_RATE_MEMBER;
+            } else if (option1 == 'C') {
+                discountRate = DISCOUNT_RATE_NONE;
+            } else if (option1 == 'Q') {
+                loopCheck = "quit"
+            }
+                else if (loopCheck.equalsIgnoreCase("quit") && orderCount == 0) {
+                exitBanner(username);
+                System.exit(0);
+            }
+        }
+
+        while(option1 != 'Q') {
+
+            option2 = validSod();
+            if(option2 == 'A')
+            {
+                sod = SOD_PREMIUM;
+                sodPrice = PRICE_PREMIUM;
+            }
+            else if(option2 == 'B')
+            {
+                sod = SOD_SPECIAL;
+                sodPrice = PRICE_SPECIAL;
+            }
+            else if(option2 == 'C')
+            {
+                sod = SOD_NORMAL;
+                sodPrice = PRICE_NORMAL;
+            }
+            else if (option2 == 'Q') {
+                loopCheck = "quit";
+            }
+            totalPrice += orderPrice;
+            if (loopCheck.equalsIgnoreCase("quit") && orderCount >= 1) {
+                displayFinalreport(discountRate, orderCount, sodCount, totalDiscounted, totalTaxed, TAX_RATE, totalPrice);
+                exitBanner(username);
+                exitBanner(username);
+                System.exit(0);
+            } else if (loopCheck.equalsIgnoreCase("quit") && orderCount == 0) {
+                exitBanner(username);
+                System.exit(0);
+            }
+        }
+            discount = (sodPrice*discountRate);
+            tax = (sodPrice - (sodPrice*discountRate))*TAX_RATE
+            orderPrice = (sodPrice - (sodPrice*discountRate))*TAX_RATE + sodPrice;
+
+            for(int i = 0; i < sodCount.length; i++)
+            {
+                sodCount[i] = sodCount[i] + sodCounter(option1)[i];
+            }
+            for(int i = 0; i < sodCount.length; i++)
+            {
+                sodCount[i] = sodCount[i] + sodCounter(option2)[i];
+            }
+
+            orderCount++;
+            displayOrderReport(sod, discountRate, sodPrice, discount, tax, orderPrice);
+        }
+    }
+
+}
